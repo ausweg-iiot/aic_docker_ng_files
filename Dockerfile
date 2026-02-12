@@ -4,8 +4,8 @@ FROM nginx:alpine
 # Clean default nginx contents
 RUN rm -rf /usr/share/nginx/html/*
 
-# Copy both Angular build outputs into their respective subfolders
-# This assumes your Jenkins 'dist' folder contains 'DigiFacto' and 'DigiTrack'
+# Copy build outputs
+# We are keeping BOTH folders as you requested
 COPY ./dist/DigiFacto /usr/share/nginx/html/DigiFacto
 COPY ./dist/DigiTrack /usr/share/nginx/html/DigiTrack
 
