@@ -1,8 +1,18 @@
-FROM python:3.9-slim
-WORKDIR /app
-RUN apt-get update && apt-get install -y build-essential && rm -rf /var/lib/apt/lists/*
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-COPY . .
-EXPOSE 8000
-CMD ["python", "server.py"]
+# Use official Nginx image
+FROM nginx:alpine
+
+# Clean default nginx contents
+RUN rm -rf /usr/share/nginx/html/*
+
+# Copy build outputs
+# We are keeping BOTH folders as you requested
+COPY ./dist/DigiTrack /usr/share/nginx/html/DigiTrack
+
+# Copy custom Nginx config
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+
+# Expose port 80
+EXPOSE 80
+
+# Run Nginx in the foreground
+CMD ["nginx", "-g", "daemon off;"]
