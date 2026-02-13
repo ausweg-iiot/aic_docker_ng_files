@@ -1,0 +1,17 @@
+server {
+    listen 80;
+    server_name _;
+
+    # DigiFacto
+    location /DigiTrack/ {
+        root /usr/share/nginx/html;
+        index index.html;
+        # This fixes 404 errors when refreshing pages like /auth/login
+        try_files $uri $uri/ /DigiTrack/index.html;
+    }
+
+    # Redirect root (/) to DigiFacto automatically
+    location = / {
+        return 301 /DigiTrack/;
+    }
+}
