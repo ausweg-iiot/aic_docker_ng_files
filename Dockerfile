@@ -6,7 +6,6 @@ RUN rm -rf /usr/share/nginx/html/*
 
 # Copy build outputs
 # We are keeping BOTH folders as you requested
-COPY ./dist/DigiFacto /usr/share/nginx/html/DigiFacto
 COPY ./dist/DigiTrack /usr/share/nginx/html/DigiTrack
 
 # Copy custom Nginx config
